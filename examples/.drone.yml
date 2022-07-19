@@ -1,0 +1,30 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+
+- name: build site
+  image: docker.io/kameshsampath/drone-mkdocs-site
+  pull: never
+  volumes:
+    - name: site-dir
+      path: /build
+
+- name: build site image
+  image: plugins/docker
+  settings:
+    repo: localhost:5001/example/mkdocs-site
+    insecure: true
+  volumes:
+    - name: site-dir
+      path: /drone/src/build
+    - name: docker-sock
+      path: /var/run/docker.sock
+
+volumes:
+  - name: site-dir
+    temp: {}
+  - name: docker-sock
+    host:
+      path: /var/run/docker.sock
