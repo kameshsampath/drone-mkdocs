@@ -23,7 +23,7 @@ name: default
 steps:
 
 - name: build site
-  image: docker.io/kameshsampath/drone-mkdocs-site
+  image: docker.io/kameshsampath/drone-mkdocs-site:v0.0.1
   pull: if-not-exists
   volumes:
     - name: site-dir
